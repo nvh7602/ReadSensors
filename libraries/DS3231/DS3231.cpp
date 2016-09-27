@@ -1,3 +1,10 @@
+/****************************************************************
+*
+@Created by Ngo Van Hoa <nvhoa7602@gmail.com> 25, September, 2016.
+*
+@Copyright (C) 2016.
+*
+*****************************************************************/
 #include "DS3231.h"
 #define DS3231_I2C_ADDRESS 104
 
@@ -21,44 +28,50 @@ byte DS3231::decToBcd(byte val)
 
 
 /********************************* setDateTime *********************************
-Input: 
-Output: 
-Remarks: 
+Input:  thu 	- the days of week
+		ngay 	- the days of month
+		thang	- the months of year
+		nam		- year
+		gio		- hour
+		phut	- minute
+		giay	- second
+Output: Time has been installed for DS3231 sensor.
+Remarks: The time just set once in SetUp() function of Arduino struct.
 ********************************************************************************/
 void DS3231::setDateTime(byte thu, byte ngay, byte thang, byte nam, byte gio, byte phut, byte giay)
 {
-  Wire.beginTransmission(DS3231_I2C_ADDRESS);
-  Wire.write(0x00);
-  Wire.write(decToBcd(giay));
-  Wire.write(decToBcd(phut));
-  Wire.write(decToBcd(gio));
-  Wire.write(decToBcd(thu));
-  Wire.write(decToBcd(ngay));
-  Wire.write(decToBcd(thang));
-  Wire.write(decToBcd(nam));
-  Wire.endTransmission();
+ 	Wire.beginTransmission(DS3231_I2C_ADDRESS);
+  	Wire.write(0x00);
+ 	Wire.write(decToBcd(giay));
+ 	Wire.write(decToBcd(phut));
+	Wire.write(decToBcd(gio));
+	Wire.write(decToBcd(thu));
+	Wire.write(decToBcd(ngay));
+	Wire.write(decToBcd(thang));
+	Wire.write(decToBcd(nam));
+	Wire.endTransmission();
 }
 
 
 
 
 /********************************* getDayName **********************************
-Input: 
-Output: 
+Input: N/A
+Output: This function return a string format as: yyyy-mm-dd.csv ( example: 2016-9-25.csv, 2016-10-25.csv,.....)
 Remarks: 
 ********************************************************************************/
 String DS3231::getDayName()
 {
-	String day = "";
 	getDateTime();
+	
+	String day = "";
+	day += "20";
 	day += year;
   	day += month;
   	day += date;
   	day += ".csv";
-  	
   	return day;
 }
-
 
 
 
@@ -69,8 +82,9 @@ Remarks:
 ********************************************************************************/
 String DS3231::getTime()
 {
-	String time = "";
 	getDateTime();
+	
+	String time = "";
 	time += hours;
 	time += ":";
 	time += minutes;

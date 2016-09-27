@@ -1,3 +1,11 @@
+/****************************************************************
+*
+@Created by Ngo Van Hoa <nvhoa7602@gmail.com> 25, September, 2016.
+*
+@Copyright (C) 2016.
+*
+*****************************************************************/
+
 #include "SDCard.h"
 
 byte chipSelect = 10; // Set CS pin for SD Card reader

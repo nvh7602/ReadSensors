@@ -1,3 +1,11 @@
+/****************************************************************
+*
+@Created by Ngo Van Hoa <nvhoa7602@gmail.com> 25, September, 2016.
+*
+@Copyright (C) 2016.
+*
+*****************************************************************/
+
 #include "DS18B20.h"
 
 #define ONE_WIRE_BUS 2 // Set pin for DS18B20

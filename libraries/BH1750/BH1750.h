@@ -1,4 +1,4 @@
-/*
+/*************************************************************************
 
 This is a library for the BH1750FVI Digital Light Sensor
 breakout board.
@@ -11,7 +11,8 @@ http://rohmfs.rohm.com/en/products/databook/datasheet/ic/sensor/light/bh1750fvi-
 
 Written by Christopher Laws, March, 2013.
 
-*/
+Copied and edited by
+***************************************************************************/
 
 #ifndef BH1750_h
 #define BH1750_h

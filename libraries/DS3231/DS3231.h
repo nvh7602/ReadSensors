@@ -17,7 +17,6 @@ typedef unsigned char byte;
 class DS3231{
 	public:
 		byte seconds, minutes, hours, day, date, month, year;
-		char weekDay[4];
 		
 	public:
 		DS3231();

@@ -1,7 +1,7 @@
 /****************************************************************************************************
  * The OpenSensor Arduino Library is an open sources for every body who work with sensor and arduino.
  *
- * @Created by Ngo Van Hoa <nvhoa7602@gmail.com>.
+ * @Created by Ngo Van Hoa <nvhoa7602@gmail.com> 25, September, 2016.
  *
  * @Copyright (C) 2016.
  *
@@ -11,7 +11,7 @@
 
 
 
-/****** NOTE ******
+/****** NOTE **********
  SD card datalogger
 
  This example shows how to log data from three analog sensors
@@ -24,7 +24,7 @@
  ** MOSI - pin 11
  ** MISO - pin 12
  ** CLK - pin 13
-*/
+*********************/
 
 #include <SPI.h>
 #include <SD.h>
