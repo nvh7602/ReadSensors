@@ -1,5 +1,5 @@
-//Standard: Data(Time, nodeID, airTemp, airHumid, gndTemp, gndHumid,light)
-// Phần winVeloc, WinDirec, rain sẽ đưa qua arduino chính.
+//Standard: Data(Time, Node ID, Air Temperature, Air Humidity, Gnd Temperature, Gnd Humidity, Light)
+// Phần Wind Veloc, Wind Director, Rain sẽ đưa qua arduino chính.
 
 //******************* Include libraries ************************************
 
@@ -11,13 +11,6 @@
 #include "BH1750.h"
 
 
-
-
-
-
-
-
-
 //***************** Setup signal pins ************************************
 
 // Nguyên
@@ -27,13 +20,6 @@
 #define QUAT 4
 
 // End: Nguyên
-
-
-
-
-
-
-
 
 
 
@@ -49,17 +35,12 @@ SoftwareSerial xBee(6,7); // Rx, Tx
 
 
 
-
-
-
-
 // ***************** Declare sensor value ******************************* 
 
 byte NodeId = 123;
 byte AirTemperature, AirHumidity, GndTemperature, GndHumidity;
 unsigned int LightIntensity; // up to 65535 lux
 unsigned long time = 0; // Set default time = 0
-
 
 // Tân
 int lastStringLength;
@@ -69,19 +50,13 @@ int i;
 
 
 
-
-
-
-
-
 //***************** Starting set up *****************************************
 void setup()
 {
   Wire.begin(); // SDCard
   Serial.begin(9600);
   xBee.begin(9600); // Start xbee 9600
-
-  ds3231.setDateTime(5,23,9,16,23,59,50); // Set time for DS3231
+  ds3231.setDateTime(5,25,9,16,23,59,50); // ******* Note: Set time for DS3231
   dht.begin(); // Start DHT sensor
   lightMeter.begin(); //Start BH1750
 
@@ -95,29 +70,17 @@ void setup()
 
 
 //************** Install SD card ****************************************
-
   sdcard.setUpSDCard(); // set CS pin (pin 10) for SD Card Reader
 }
-
 
 
 
 //***********************************************************************
 void loop()
 {
-  AirTemperature = dht.readTemperature(); // Read data from DHT sensor
+  ReadSensor();
 
-  AirHumidity = dht.readHumidity(); // Read data from DHT sensor
-
-  GndTemperature = ds18b20.getGndTemp(); // Read data from DS18B20 ( temp of soil)
-  
-  GndHumidity = map(analogRead(A3), 0, 1023, 0, 255); // Read data from soilSensor 
-
-  LightIntensity = lightMeter.readLight();  // Read data from light sensor 
-
-
-// Control at here
-  
+  // Controls at here:
 
   String dataWrite = "";
   dataWrite += ds3231.getTime(); // Time
@@ -145,39 +108,41 @@ void loop()
 
   if((unsigned long)(millis() - time) > 3000)
   {
-    //************* Write data to SD Card *******************************
-    
-      Serial.println(dataSend);
+      sdcard.writeData(dataWrite, ds3231.getDayName());     // Write data to SD Card
       
-      sdcard.writeData(dataWrite, ds3231.getDayName()); // Check file exist and write data to SD Card
-
-    //************** Send data to Xbee **********************************
-
-
-      sendStatus(dataSend); 
+      sendStatus(dataSend);   // Send data to Xbee
+      
       if (xBee.available())
       {
           String lightValue = receiveStatus();
           Serial.println(lightValue);
-       }  
+      }  
    
 
       
-    //Serial.println(millis());
+  
     time = millis();
   }
 }
 
 
+void ReadSensor()
+{
+  AirTemperature = dht.readTemperature(); // Read data from DHT sensor
+  AirHumidity = dht.readHumidity(); // Read data from DHT sensor
+  GndTemperature = ds18b20.getGndTemp(); // Read data from DS18B20 ( temp of soil)
+  GndHumidity = map(analogRead(A3), 0, 1023, 0, 255); // Read data from soilSensor 
+  LightIntensity = lightMeter.readLight();  // Read data from light sensor 
+}
 
 //Tân
-void sendStatus(String data) {
-  lastStringLength = data.length();
+void sendStatus(String dataSend) {
+  lastStringLength = dataSend.length();
 
   for(i = 0; i < lastStringLength; i++)
   {
-     xBee.write(data.charAt(i));
-     Serial.print(data.charAt(i));
+     xBee.write(dataSend.charAt(i));
+     Serial.print(dataSend.charAt(i));
     }
     Serial.println("");
 }
@@ -185,17 +150,17 @@ void sendStatus(String data) {
 String receiveStatus()
 {
   //Serial.println("begin receive");
-  String data;
+  String dataReceive;
   while(1)
   {
     if(xBee.available()){
         char receiveChar = xBee.read();
         if (receiveChar == '#') break;
-        data += receiveChar;   
+        dataReceive += receiveChar;   
         }
   }
     //Serial.println("end receive");
-    return data;
+    return dataReceive;
 }
 
 //End: Tân
