@@ -22,7 +22,6 @@ Copied and edited by
 #else
 #include <WProgram.h>
 #endif
-
 #include "Wire.h"
 
 #define BH1750_DEBUG 0

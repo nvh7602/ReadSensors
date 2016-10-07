@@ -6,10 +6,9 @@
 #include "DHT.h"
 #include "DS18B20.h"
 #include "BH1750.h"
-#include "GetData.h"
 
 //************ Node ID ***********
-#define NodeId 123
+//#define NodeId 123
 
 //************ XBEE **************
 #define RX 6
