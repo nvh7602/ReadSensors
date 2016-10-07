@@ -107,7 +107,7 @@ void loop()
       dataW += SoilTemperature;
       dataW += ",";
       dataW += SoilMoisture;
-      dataW +=',';
+      dataW += ",";
       dataW += LightIntensity;
     
       String dataS = "(";
