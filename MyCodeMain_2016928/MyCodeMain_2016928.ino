@@ -18,27 +18,13 @@ Phần WindVelocity, WindDirector, Rain sẽ đưa qua 1 arduino khác.
 */ 
 
 //******************* Include libraries ************************************
-
-#include <SoftwareSerial.h>
 #include "CONFIG.h"
-#include "DS3231.h"
-#include "SDCard.h"
-#include "DHT.h"
-#include "DS18B20.h"
-#include "BH1750.h"
-
-
-//***************** Setup signal pins ************************************
-
-
-
-
 
 //***************** Declare Object ***************************************
 
 DS3231 ds3231;
 SDCard sdcard;
-DHT dht(DHTPIN, DHT11); // Set pin 3 to get values from DHT sensor.// Type of sensor (DHT11 or DHT22)
+DHT dht(DHTPIN, DHT11); 
 DS18B20 ds18b20;
 BH1750 lightMeter;
 

@@ -1,3 +1,11 @@
+//******************* Include libraries ************************************
+
+#include <SoftwareSerial.h>
+#include "DS3231.h"
+#include "SDCard.h"
+#include "DHT.h"
+#include "DS18B20.h"
+#include "BH1750.h"
 
 //************ Node ID ***********
 //#define NodeId 123
@@ -8,7 +16,7 @@
 
 
 //*********** DHT ****************
-#define DHTPIN 3
+#define DHTPIN 3 // Set pin 3 to get values from DHT sensor.// Type of sensor (DHT11 or DHT22)
 
 //************ SDCard ************
 
