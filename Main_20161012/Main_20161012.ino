@@ -26,6 +26,7 @@ DS18B20 ds18b20;
 BH1750 lightMeter;
 GetData data;
 XBeePro xBeeObject;
+//Adafruit_AM2315 am2315; // Cảm biến nhiệt độ độ ẩm AM2315
 
 
 
@@ -134,8 +135,10 @@ void loop()
 //***************** Reading data from sensors *******************************
 
     AirTemperature = dht.readTemperature(); // Read data from DHT sensor
+    //AirTemperature = am2315.readTemperature(); // Read data from AM2315 sensor
     
     AirHumidity = dht.readHumidity(); // Read data from DHT sensor
+    //AirHumidity = am2315.readHumidity(); // Read data from AM2315 sensor
     
     SoilTemperature = ds18b20.getGndTemp(); // Read data from DS18B20 ( temp of soil)
     
