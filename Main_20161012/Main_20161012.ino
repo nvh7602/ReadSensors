@@ -140,7 +140,7 @@ void loop()
     AirHumidity = dht.readHumidity(); // Read data from DHT sensor
     //AirHumidity = am2315.readHumidity(); // Read data from AM2315 sensor
     
-    SoilTemperature = ds18b20.getGndTemp(); // Read data from DS18B20 ( temp of soil)
+    SoilTemperature = ds18b20.getTemperature(); // Read data from DS18B20 ( temp of soil)
     
     SoilMoisture = map(analogRead(A3), 0, 1023, 0, 255); // Read data from soilSensor 
     
