@@ -16,6 +16,6 @@ typedef unsigned char byte;
 class DS18B20{
 	public:
 		DS18B20();
-		byte getGndTemp();
+		byte getTemperature();
 		
 };
