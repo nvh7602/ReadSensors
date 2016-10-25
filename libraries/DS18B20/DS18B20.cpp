@@ -26,12 +26,12 @@ DS18B20::DS18B20()
 
 
 
-/********************************* getGndTemp*******************************
+/********************************* getTemperature******************************
 Input: N/A
 Output: Measured temperature value is in the range -55 to125.
 Remarks: 
 ****************************************************************************/
-byte DS18B20::getGndTemp()
+byte DS18B20::getTemperature()
 {
 	gndTemp.requestTemperatures();
 	return gndTemp.getTempCByIndex(0);
