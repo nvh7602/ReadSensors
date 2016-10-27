@@ -142,7 +142,7 @@ void loop()
     
     SoilTemperature = ds18b20.getTemperature(); // Read data from DS18B20 ( temp of soil)
     
-    SoilMoisture = map(analogRead(A3), 0, 1023, 0, 255); // Read data from soilSensor 
+    SoilMoisture = map(analogRead(A3), 0, 1023, 0, 100); // Read data from soilSensor 
     
     LightIntensity = lightMeter.readLight();  // Read data from light sensor 
 
